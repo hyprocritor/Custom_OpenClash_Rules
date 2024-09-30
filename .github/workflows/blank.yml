@@ -19,6 +19,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    environment: Actions
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -31,6 +32,8 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        env:
+           GITHUB_TOKEN: ${{secrets.ACCESS_TOKEN}}
         run: |
           chmod +x rules-cleanup.sh
           ./rules-cleanup.sh
