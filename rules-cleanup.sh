@@ -15,7 +15,7 @@ if [ -d "$SOURCE_DIR" ]; then
 else
     echo "Cloning source repository..."
     echo $GITHUB_TOKEN
-    git clone `https://${GITHUB_TOKEN}@${SOURCE_REPO_URL}`
+    git clone `${SOURCE_REPO_URL}`
 fi
 
 # 检查配置文件是否存在
@@ -44,7 +44,7 @@ if [ -d "$TARGET_DIR" ]; then
     cd "$TARGET_DIR" && git pull origin latest && cd ..
 else
     echo "Cloning target repository..."
-    git clone "$TARGET_REPO_URL" $TARGET_DIR
+    git clone `https://${GITHUB_TOKEN}@$TARGET_REPO_URL` $TARGET_DIR
 fi
 
 # 将修改后的文件复制到目标仓库
