@@ -2,7 +2,7 @@
 
 # 设置变量
 SOURCE_REPO_URL="https://github.com/Aethersailor/Custom_OpenClash_Rules.git"
-TARGET_REPO_URL="https://github.com/hyprocritor/Custom_OpenClash_Rules.git"
+TARGET_REPO_URL="github.com/hyprocritor/Custom_OpenClash_Rules.git"
 SOURCE_DIR="Custom_OpenClash_Rules"
 TARGET_DIR="custom_clash_rule_hyprocritor"
 CFG_FILE="$SOURCE_DIR/cfg/Custom_Clash.ini"
@@ -14,7 +14,8 @@ if [ -d "$SOURCE_DIR" ]; then
     cd "$SOURCE_DIR" && git pull origin main && cd ..
 else
     echo "Cloning source repository..."
-    git clone "$SOURCE_REPO_URL"
+    echo $GITHUB_TOKEN
+    git clone `https://${GITHUB_TOKEN}@${SOURCE_REPO_URL}`
 fi
 
 # 检查配置文件是否存在
