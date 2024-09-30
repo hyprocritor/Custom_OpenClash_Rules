@@ -26,13 +26,13 @@ fi
 # 删除以指定节点开头的行
 echo "Removing lines starting with specific proxy groups..."
 for node in "${REMOVE_NODES[@]}"; do
-  sed -i '' "/custom_proxy_group=${node}/d" "$CFG_FILE"
+  sed -i "/custom_proxy_group=${node}/d" "$CFG_FILE"
 done
 
 # 替换文件中其他行的这些节点为空
 echo "Replacing specified nodes in remaining lines..."
 for node in "${REMOVE_NODES[@]}"; do
-  sed -i '' "s/${node}\`\[\]//g" "$CFG_FILE"
+  sed -i "s/${node}\`\[\]//g" "$CFG_FILE"
 done
 
 echo "Source repository processing completed."
@@ -49,13 +49,4 @@ fi
 # 将修改后的文件复制到目标仓库
 cp "$CFG_FILE" "$TARGET_DIR/cfg/"
 
-# 进入目标仓库目录
-cd "$TARGET_DIR"
 
-# 提交并推送更改到latest分支
-git checkout -b latest || git checkout latest
-git add .
-git commit -m "Update Custom_Clash.ini with filtered nodes"
-git push origin latest
-
-echo "Changes have been pushed to the latest branch of $TARGET_REPO_URL."
